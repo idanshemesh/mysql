@@ -4,7 +4,7 @@ param(
 [Parameter(Mandatory=$true)] [string]$MEBPath,
 [Parameter(ParameterSetName='Backup',Mandatory=$false, Position=1)] [switch]$Backup,
 [Parameter(ParameterSetName='Backup',Mandatory=$true, Position=2)][ValidateSet('full','inc')] [string]$BackupType,
-[Parameter(ParameterSetName='Backup',Mandatory=$true, Position=3)][int]$DeleteBackupsOlderThanDays = 1,  #Default 
+[Parameter(ParameterSetName='Backup',Mandatory=$true, Position=3)][int]$DeleteBackupsOlderThanDays = 3,  #Default 
 [Parameter(ParameterSetName='Restore',Mandatory=$false, Position=1)][switch]$Restore,
 [Parameter(ParameterSetName='Restore',Mandatory=$true, Position=2)][string]$RestoreTempPath,
 [Parameter(ParameterSetName='Backup',Mandatory=$true, Position=3)] [Parameter(ParameterSetName='Restore',Mandatory=$true, Position=3)] [string]$BackupPath
@@ -156,7 +156,7 @@ elseif($Restore){
 
     do {
         try {
-            [ValidateSet('yes','no')]$sAnswer = Read-Host "Are you shure to continue (yes/no)?"
+            [ValidateSet('yes','no')]$sAnswer = Read-Host "Are you sure to continue (yes/no)?"
         }
         catch {
             Write-Host  -ForegroundColor red "Type 'yes' or 'no'"
@@ -165,7 +165,7 @@ elseif($Restore){
     while (-not $sAnswer)
      
     if ($sAnswer -eq "yes") {
-        #Prepare restore  folder, Copy full backup and apply incrimental backups
+        #Prepare restore  folder, Copy full backup and apply incremental backups
 
         Remove-Item "$RestoreTempPath\*" -Recurse -Force -Confirm -ErrorAction Stop
         for ($j = $i ; $j -ge $nSelectedBackup-1; $j--)
@@ -175,7 +175,7 @@ elseif($Restore){
             Write-Host "========================================================="
 
             if ($aBackups[$j].Type -eq "full") {
-                Write-Host "Copy fulll backup to TEMP folder $RestoreTempPath :"
+                Write-Host "Copy full backup to TEMP folder $RestoreTempPath :"
                 try {
                     Copy-item -Force -Recurse -Verbose "$($aBackups[$j].FullPath)\*" -Destination $RestoreTempPath -ErrorAction Stop
                 }
