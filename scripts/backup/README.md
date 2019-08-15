@@ -23,19 +23,19 @@ Create backup and restore parameters file using MySQL Workbench:
 ### Full Backup
 
 ```
-MySQLBackupRestore.ps1 -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath "<MySQL>\bin\mysqlbackup.exe" -Backup -BackupType *full* -BackupPath "<BackupDir>\Instance" -DeleteBackupsOlderThanDays <N>
+MySQLBackupRestore.ps1 -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath <MySQL>\bin\mysqlbackup.exe -Backup -BackupType full -BackupPath <BackupDir>\Instance -DeleteBackupsOlderThanDays <N>
 ```
 
 ### Incremenal Backup
 
 ```
-MySQLBackupRestore.ps1 -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath "<MySQL>\bin\mysqlbackup.exe" -Backup -BackupType *inc* -BackupPath "<BackupDir>\Instance" -DeleteBackupsOlderThanDays <N>
+MySQLBackupRestore.ps1 -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath <MySQL>\bin\mysqlbackup.exe -Backup -BackupType inc -BackupPath "<BackupDir>\Instance" -DeleteBackupsOlderThanDays <N>
 ```
 
 ## Restore
 
 ```
-.\MySQLBackupRestore.ps1 **-Restore** -RestoreTempPath <TempDir> -BackupPath"<BackupDir>\Instance" -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath <MySQL>\bin\mysqlbackup.exe
+.\MySQLBackupRestore.ps1 -Restore -RestoreTempPath <TempDir> -BackupPath <BackupDir>\Instance -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath <MySQL>\bin\mysqlbackup.exe
 ```
 
 *Example of the output:*
