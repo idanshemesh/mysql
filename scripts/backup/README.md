@@ -13,21 +13,30 @@ Create backup and restore parameters file using MySQL Workbench:
    1. Set the path of mysqlbackup.exe
    2. Set the backup path
    3. Create a backup user & password.
-4. Create new full backup job - this will create a configuration file like:  <BackupDir>\<JobName>.cnf
+4. Create new full backup job - this will create a configuration file like
+   ```
+   <BackupDir>\<JobName>.cnf
+   ```
 
 ## Backup
 
 ### Full Backup
 
+```
 MySQLBackupRestore.ps1 -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath "<MySQL>\bin\mysqlbackup.exe" -Backup -BackupType *full* -BackupPath "<BackupDir>\Instance" -DeleteBackupsOlderThanDays <N>
+```
 
 ### Incremenal Backup
 
+```
 MySQLBackupRestore.ps1 -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath "<MySQL>\bin\mysqlbackup.exe" -Backup -BackupType *inc* -BackupPath "<BackupDir>\Instance" -DeleteBackupsOlderThanDays <N>
+```
 
 ## Restore
 
+```
 .\MySQLBackupRestore.ps1 **-Restore** -RestoreTempPath <TempDir> -BackupPath"<BackupDir>\Instance" -DefaultsFile <BackupDir>\<JobName>.cnf -MEBPath <MySQL>\bin\mysqlbackup.exe
+```
 
 *Example of the output:*
 ```
